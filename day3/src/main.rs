@@ -68,18 +68,8 @@ fn main() -> io::Result<()> {
         }
     }
 
-    //println!("Intersection: {:?}", hash1.intersection(&hash2).collect::<Vec<&(i64,i64)>>());
-    let intersections = hash1.intersection(&hash2).collect::<Vec<&(i64, i64)>>();
-    let mut min = u64::MAX;
-    for i in intersections {
-        let c_min: u64 = (i.0 - 0).abs() as u64 + (i.1 - 0).abs() as u64;
-
-        if min > c_min {
-            min = c_min
-        }
-    }
-
-    println!("{}", min);
+    let intersections = hash1.intersection(&hash2).map(|x| x.0.abs() + x.1.abs()).collect::<Vec<i64>>();
+    println!("{:?} ", intersections.iter().min().unwrap());
 
     Ok(())
 }
